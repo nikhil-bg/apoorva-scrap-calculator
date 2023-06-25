@@ -1,21 +1,30 @@
 document.getElementById('calculator-form').addEventListener('submit', function(event) {
-    event.preventDefault(); 
+    event.preventDefault();
+    let lengthWastagePerComponent = 2;
 
-    var componentLength = parseFloat(document.getElementById('component_length').value);
-    var componentWeight = parseFloat(document.getElementById('component_weight').value);
-    var rodWeight = parseFloat(document.getElementById('rod_weight').value);
-    var rodLength = parseFloat(document.getElementById('rod_length').value);
-    var endBit = parseFloat(document.getElementById('end_bit').value);
+    var lengthComponentMm = parseFloat(document.getElementById('component_length').value);
+    var weightComponentKg = parseFloat(document.getElementById('component_weight').value);
+    var weightRodKg = parseFloat(document.getElementById('rod_weight').value);
+    var lengthRodMm = parseFloat(document.getElementById('rod_length').value);
+    var lengthRemovedStartMm = parseFloat(document.getElementById('end_bit').value);
 
-    console.log(componentLength, componentWeight, rodWeight, rodLength, endBit);
-
-    componentLength += 2;
-    var gramWeight = componentWeight * 1000;
-    var usableRod = rodLength - endBit;
-    var partsProduced = usableRod / componentLength;
-    var makeableWeight = gramWeight * partsProduced;
-    var makeableKg = makeableWeight / 1000;
-    var scrapValue = (rodWeight - makeableKg).toFixed(2);
-
-    alert(`Scrap Value: ${scrapValue} kg`);
+    const totalWastageKg = calculatetotalWastageKg(weightRodKg, lengthRodMm, weightComponentKg, lengthComponentMm, lengthRemovedStartMm, lengthWastagePerComponent);
+    alert("Total Wastage: " + totalWastageKg.toFixed(4) + " kg");
 });
+
+function calculatetotalWastageKg(weightRodKg, lengthRodMm, weightComponentKg, lengthComponentMm, lengthRemovedStartMm, lengthWastagePerComponent) {
+    // Calculate weight removed from the the rod at start
+    const weightRemovedStartKg = (weightRodKg / lengthRodMm) * lengthRemovedStartMm;
+  
+    // Calculate the number of components that can be produced
+    const remainingLengthMm = lengthRodMm - lengthRemovedStartMm;
+    const numComponents = Math.floor(remainingLengthMm / lengthComponentMm);
+  
+    // Calculate the weight of the wastage produced
+    const weightWastagePerComponentKg = (weightComponentKg / lengthComponentMm) * lengthWastagePerComponent;
+    const weightWastageTotalKg = weightWastagePerComponentKg * numComponents;
+  
+    const totalWastageKg = weightRemovedStartKg + weightWastageTotalKg;
+  
+    return totalWastageKg;
+  }
