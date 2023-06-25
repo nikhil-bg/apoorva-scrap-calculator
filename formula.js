@@ -17,5 +17,5 @@ document.getElementById('calculator-form').addEventListener('submit', function(e
     var makeableKg = makeableWeight / 1000;
     var scrapValue = (rodWeight - makeableKg).toFixed(2);
 
-    alert(`Scrap Value: ${scrapValue}`);
+    alert(`Scrap Value: ${scrapValue} kg`);
 });
