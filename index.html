@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Scrap Calculator</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container">
+        <h1>Apoorva Auto Components - Scrap Calculator</h1>
+        <form id="calculator-form">
+            <label for="rod_weight">Enter the weight of a single rod (in Kg):</label>
+            <input id="rod_weight" type="text" name="rod_weight">
+
+            <label for="component_weight">Enter the weight of a single component produced (in Kg):</label>
+            <input id="component_weight" type="text" name="component_weight">
+
+            <label for="rod_length">Enter the rod length (in mm):</label>
+            <input id="rod_length" type="text" name="rod_length">
+
+            <label for="end_bit">Enter the end bit (in mm):</label>
+            <input id="end_bit" type="text" name="end_bit">
+
+            <label for="component_length">Enter the length of the component (in mm):</label>
+            <input id="component_length" type="text" name="component_length">
+            
+            <input type="submit" value="Calculate">
+        </form>
+        <p class="credentials">Designed & Developed by Nikhil BG</p>
+    </div>
+
+    <script src="./formula.js"></script>
+</body>
+</html>
